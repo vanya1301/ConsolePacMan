@@ -241,12 +241,12 @@ CHAR_INFO * PlayField::getBuffer()
 	return mChiBuffer;
 }
 
-int PlayField::getPoints()
+int PlayField::getPoints() const
 {
 	return mScore;
 }
 
-int PlayField::getLifes()
+int PlayField::getLifes() const
 {
 	return mLife;
 }

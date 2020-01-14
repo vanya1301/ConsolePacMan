@@ -94,10 +94,10 @@ void Game::setWindow(const int &Width, const int &Height)
 	SetConsoleWindowInfo(mConsole, TRUE, &Rect);
 }
 
-void Game::keyPressed(const int &keyCode)
+void Game::keyPressed(const int &aKeyCode)
 {
 	if (isGame){
-		mPlayField->setPacManDirection(keyCode);
+		mPlayField->setPacManDirection(aKeyCode);
 	}
 }
 

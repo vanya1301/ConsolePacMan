@@ -35,9 +35,9 @@ public:
 
 	void setPacManDirection(const int &aKeyCode);
 	
-	int getPoints();
+	int getPoints() const;
 
-	int getLifes();
+	int getLifes() const;
 
 	CHAR_INFO* getBuffer();
 	   

@@ -17,7 +17,7 @@ public:
 private:
 
 	void setWindow(const int &Width, const int &Height);
-	void keyPressed(const int &keyCode);
+	void keyPressed(const int &aKeyCode);
 	void Render();
 	const int cWidthSize;
 	const int cHeightSize;
