@@ -13,14 +13,8 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\Cells">
-      <UniqueIdentifier>{dd98c344-d040-4394-967a-863cdb388e70}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Figures">
       <UniqueIdentifier>{efc74531-03b8-469a-98f3-c5c375749477}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Cells">
-      <UniqueIdentifier>{43c8d5b5-f003-4a6f-9117-4c1bd6a14c18}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Figures">
       <UniqueIdentifier>{ad6ea169-4a5d-42a6-9bda-de498c532651}</UniqueIdentifier>
@@ -33,12 +27,6 @@
     <ClInclude Include="PlayField.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BarierCell.h">
-      <Filter>Header Files\Cells</Filter>
-    </ClInclude>
-    <ClInclude Include="JailCell.h">
-      <Filter>Header Files\Cells</Filter>
-    </ClInclude>
     <ClInclude Include="Figure.h">
       <Filter>Header Files\Figures</Filter>
     </ClInclude>
@@ -47,9 +35,6 @@
     </ClInclude>
     <ClInclude Include="RedFigure.h">
       <Filter>Header Files\Figures</Filter>
-    </ClInclude>
-    <ClInclude Include="FieldLabyrinth.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
@@ -60,23 +45,14 @@
     <ClInclude Include="PinkFigure.h">
       <Filter>Header Files\Figures</Filter>
     </ClInclude>
-    <ClInclude Include="Figures.h">
-      <Filter>Header Files\Figures</Filter>
-    </ClInclude>
     <ClInclude Include="CyanFigure.h">
       <Filter>Header Files\Figures</Filter>
     </ClInclude>
-    <ClInclude Include="PlayCell.h">
-      <Filter>Header Files\Cells</Filter>
-    </ClInclude>
-    <ClInclude Include="Cell.h">
-      <Filter>Header Files\Cells</Filter>
-    </ClInclude>
-    <ClInclude Include="Cells.h">
-      <Filter>Header Files\Cells</Filter>
-    </ClInclude>
     <ClInclude Include="CStopwatch.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FigureFactory.h">
+      <Filter>Header Files\Figures</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -86,12 +62,6 @@
     <ClCompile Include="PlayField.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BarierCell.cpp">
-      <Filter>Source Files\Cells</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayCell.cpp">
-      <Filter>Source Files\Cells</Filter>
-    </ClCompile>
     <ClCompile Include="Figure.cpp">
       <Filter>Source Files\Figures</Filter>
     </ClCompile>
@@ -100,9 +70,6 @@
     </ClCompile>
     <ClCompile Include="RedFigure.cpp">
       <Filter>Source Files\Figures</Filter>
-    </ClCompile>
-    <ClCompile Include="JailCell.cpp">
-      <Filter>Source Files\Cells</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
@@ -118,9 +85,6 @@
     </ClCompile>
     <ClCompile Include="CyanFigure.cpp">
       <Filter>Source Files\Figures</Filter>
-    </ClCompile>
-    <ClCompile Include="Cell.cpp">
-      <Filter>Source Files\Cells</Filter>
     </ClCompile>
     <ClCompile Include="CStopwatch.cpp">
       <Filter>Source Files</Filter>

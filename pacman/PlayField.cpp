@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "PlayField.h"
-#include "FieldLabyrinth.h"
+
 
 
 PlayField::PlayField(int xSize, int ySize) :
@@ -11,11 +11,20 @@ PlayField::PlayField(int xSize, int ySize) :
 	fillField();
 }
 
+PlayField::~PlayField()
+{
+	delete[] mChiBuffer;
+	for (auto a : mFigures)
+	{
+		delete a;
+	}
+}
+
 void PlayField::fillField()
 {
-	for (int i = 0; i < ySize; i++)
+	for (size_t i = 0; i < ySize; i++)
 	{
-		for (int j = 0; j < xSize; j++)
+		for (size_t j = 0; j < xSize; j++)
 		{
 			if (i == ySize - 1 && j < mScoreStr.size())
 			{
@@ -23,7 +32,7 @@ void PlayField::fillField()
 				continue;
 			}
 
-			switch (map[i][j])
+			switch (mLabyrinthMap[i][j])
 			{
 			case '0':
 				setCell(Position(j, i), 'x', BACKGROUND_INTENSITY);
@@ -33,44 +42,22 @@ void PlayField::fillField()
 				break;
 			case '#':
 				setCell(Position(j, i), ' ');
+				mJailCells.push_back(Position(j, i));
 				break;
 			case ' ':
 				setCell(Position(j, i), ' ');
+				break;
+			case'd':
+				setCell(Position(j, i), '.');
+				mDecidingCells.push_back(Position(j, i));
 				break;
 			default:
 				setCell(Position(j, i), '*', BACKGROUND_INTENSITY | BACKGROUND_RED);
 				break;
 			}
 		}
-		
+
 	}
-	//for (int i = 0; i < map.size(); i++)
-	//{
-	//	mField.push_back(vector<Cell*>());
-	//	for (int j = 0; j < map[i].size(); j++)
-	//	{
-	//		switch (map[i][j])
-	//		{
-	//		case '0':
-	//			mField[i].push_back(new BarierCell());
-	//			mChiBuffer[j + map[i].size()*i].Char.UnicodeChar = 'X';
-	//			break;
-	//		case '.':
-	//			mField[i].push_back(new PlayCell());
-	//			mChiBuffer[j + map[i].size()*i].Char.UnicodeChar = '.';
-	//			break;
-	//		case '#':
-	//			mField[i].push_back(new JailCell());
-	//			mChiBuffer[j + map[i].size()*i].Char.UnicodeChar = ' ';
-	//			break;
-	//		default:
-	//			mField[i].push_back(new PlayCell());
-	//			mChiBuffer[j + map[i].size()*i].Char.UnicodeChar = '.';
-	//			break;
-	//		}
-	//		mChiBuffer[j + map[i].size()*i].Attributes = BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_RED;
-	//	}
-	//}
 }
 
 void PlayField::setCell(const Position & aPos, const wchar_t & aSymbol, const short &aColor)
@@ -97,12 +84,36 @@ bool PlayField::isFigureTypeExists(const Figure & aFigure) const
 	return result;
 }
 
+bool PlayField::isJailCell(const Position & aPosition) const
+{
+	bool result = false;
+	for (const auto &cell : mJailCells)
+	{
+		if (cell == aPosition)
+			result = true;
+	}
+	return result;
+}
+
+bool PlayField::isDecidingCell(const Position & aPosition) const
+{
+	bool result = false;
+	for (const auto &cellPos : mDecidingCells)
+	{
+		if (cellPos == aPosition)
+		{
+			result = true;
+		}
+	}
+	return result;
+}
+
 Figure * PlayField::getPacMan()
 {
 	Figure *result = nullptr;
 	for (const auto& figure : mFigures)
 	{
-		if (figure->getType() == Figure::FigureType::PACMAN) {
+		if (figure->getType() == FigureType::PACMAN) {
 			result = figure;
 			break;
 		}
@@ -115,83 +126,75 @@ void PlayField::setPacManDirection(const int &aKeyCode)
 	auto pacMan = getPacMan();
 	auto pacManPos = pacMan->getPosition();
 
-	Figure::FigureDirection direction;
+	FigureDirection direction = pacMan->getCurrentDirection();
 	switch (aKeyCode) {
 	case Direction::DOWN:
-		direction = Figure::FigureDirection::DOWN;
+		direction = FigureDirection::DOWN;
 		pacManPos.y++;
 		break;
 	case Direction::UP:
-		direction = Figure::FigureDirection::UP;
+		direction = FigureDirection::UP;
 		pacManPos.y--;
 		break;
 	case Direction::RIGHT:
-		direction = Figure::FigureDirection::RIGHT;
+		direction = FigureDirection::RIGHT;
 		pacManPos.x++;
 		break;
 	case Direction::LEFT:
-		direction = Figure::FigureDirection::LEFT;
+		direction = FigureDirection::LEFT;
 		pacManPos.x--;
 		break;
 	default:
-		return;
 		break;
 	}
 
-	if (getCellSymbol(pacManPos) != 'x') {
+	if (getCellSymbol(pacManPos) != 'x' && !isJailCell(pacManPos)) {
 		pacMan->setCurrentDirection(direction);
 	}
 	else {
-	pacMan->setNextDirection(direction);
+		pacMan->setNextDirection(direction);
 	}
 }
-
 
 void PlayField::setFigurePosition(Figure * aFigure, const Position &aPosition)
 {
-	for (const auto &figure : mFigures)
-	{
-		if (aFigure == figure) {
-			
-			if (getCellSymbol(aPosition) != 'x') {
-				setCell(figure->getPosition(), ' ');
-				setCell(aPosition, ' ', aFigure->getFigureColor());
-				aFigure->setPosition(aPosition);
+	if (aFigure != nullptr) {
+		for (const auto &figure : mFigures)
+		{
+			if (aFigure == figure) {
+
+				if (getCellSymbol(aPosition) != 'x' && !isJailCell(aPosition)) {
+					setCell(figure->getPosition(), ' ');
+					setCell(aPosition, ' ', aFigure->getFigureColor());
+					aFigure->setPosition(aPosition);
+				}
+				break;
 			}
-			break;
 		}
 	}
 
-}
-
-void PlayField::changeDirection(Figure * aFigure, const Direction &aDirection)
-{
-	for (const auto &figure : mFigures)
-	{
-		if (figure == aFigure) {
-
-		}
-	}
 }
 
 bool PlayField::addFigure(Figure *aFigure)
 {
 	bool result = false;
-	auto figurePos = aFigure->getPosition();
-	auto figureColor = aFigure->getFigureColor();
+	if (aFigure != nullptr) {
+		auto figurePos = aFigure->getPosition();
+		auto figureColor = aFigure->getFigureColor();
 
-	if (!isFigureTypeExists(*aFigure)) {
-		setCell(figurePos, ' ', figureColor);
-		mFigures.push_back(aFigure);
-		result = true;
+		if (!isFigureTypeExists(*aFigure)) {
+			setCell(figurePos, ' ', figureColor);
+			mFigures.push_back(aFigure);
+			result = true;
+		}
 	}
 	return result;
-
 }
 
-void PlayField::moveFigures(const float &delta)
+void PlayField::updateFigures(const float &delta)
 {
 	movePacMan(delta);
+	moveGhosts(delta);
 }
 
 void PlayField::movePacMan(const float &delta)
@@ -202,24 +205,9 @@ void PlayField::movePacMan(const float &delta)
 		auto pacMan = getPacMan();
 		auto pacManDirection = pacMan->getCurrentDirection();
 		auto pacManPos = pacMan->getPosition();
-		switch (pacManDirection)
-		{
-		case Figure::FigureDirection::UP:
-			pacManPos.y--;
-			break;
-		case Figure::FigureDirection::DOWN:
-			pacManPos.y++;
-			break;
-		case Figure::FigureDirection::RIGHT:
-			pacManPos.x++;
-			break;
-		case Figure::FigureDirection::LEFT:
-			pacManPos.x--;
-			break;
-		default:
-			return;
-			break;
-		}
+
+		moveFigure(pacMan);
+
 		switch (getCellSymbol(pacManPos))
 		{
 		case '.':
@@ -231,9 +219,53 @@ void PlayField::movePacMan(const float &delta)
 		default:
 			break;
 		}
-		setFigurePosition(pacMan, pacManPos);
+
 		waiter = 0;
 	}
+}
+
+void PlayField::moveGhosts(const float & delta)
+{
+	static float waiter = 0;
+	auto pacMan = getPacMan();
+	FigureDirection figureDirection;
+	waiter += delta;
+	if (waiter > 0.15) {
+		for (auto &ghost : mFigures)
+		{
+			if (ghost->getType() != FigureType::PACMAN) {
+				if (isDecidingCell(ghost->getPosition())) {
+					ghost->changeFigureDirection(pacMan->getPosition());
+				}
+				moveFigure(ghost);
+				waiter = 0;
+			}
+		}
+	}
+}
+
+void PlayField::moveFigure(Figure * figure)
+{
+	auto figureDirection = figure->getCurrentDirection();
+	auto figurePos = figure->getPosition();
+	switch (figureDirection)
+	{
+	case FigureDirection::UP:
+		figurePos.y--;
+		break;
+	case FigureDirection::DOWN:
+		figurePos.y++;
+		break;
+	case FigureDirection::RIGHT:
+		figurePos.x++;
+		break;
+	case FigureDirection::LEFT:
+		figurePos.x--;
+		break;
+	default:
+		break;
+	}
+	setFigurePosition(figure, figurePos);
 }
 
 CHAR_INFO * PlayField::getBuffer()
@@ -251,6 +283,4 @@ int PlayField::getLifes() const
 	return mLife;
 }
 
-PlayField::~PlayField()
-{
-}
+

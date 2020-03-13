@@ -1,6 +1,6 @@
 #pragma once 
 
-#include "Figures.h"
+#include "FigureFactory.h"
 #include "Cells.h"
 #include <vector>
 #include <iostream>
@@ -22,25 +22,27 @@ public:
 	PlayField(int xSize, int ySize);
 
 	virtual ~PlayField();
-	
-	void setFigurePosition(Figure * aFigure, const Position &aPosition);
 
-	void changeDirection(Figure * aFigure, const Direction &aDirection);
+	void setFigurePosition(Figure * aFigure, const Position &aPosition);
 
 	bool addFigure(Figure *aFigure);
 
-	void moveFigures(const float &delta);
+	void updateFigures(const float &delta);
 
 	void movePacMan(const float &delta);
 
+	void moveGhosts(const float &delta);
+
+	void moveFigure(Figure *figure);
+
 	void setPacManDirection(const int &aKeyCode);
-	
+
 	int getPoints() const;
 
 	int getLifes() const;
 
 	CHAR_INFO* getBuffer();
-	   
+
 private:
 
 	void fillField();
@@ -50,6 +52,10 @@ private:
 	char getCellSymbol(const Position &aPosition) const;
 
 	bool isFigureTypeExists(const Figure &aFigure) const;
+
+	bool isJailCell(const Position &aPosition) const;
+
+	bool isDecidingCell(const Position &aPosition) const;
 
 	Figure* getPacMan();
 
@@ -63,11 +69,48 @@ private:
 
 	int mLife;
 
-	vector<vector<Cell*>> mField;
+	CHAR_INFO* mChiBuffer;
 
 	string mScoreStr{ "Score:" };
 
-	CHAR_INFO* mChiBuffer;
+	vector<Position> mDecidingCells;
+
+	vector<Position> mJailCells;
+
+	vector<string> mLabyrinthMap =
+	{ {"0000000000000000000000000000"}
+	 ,{"02....d......00......d....20"}
+	 ,{"0.0000.00000.00.00000.0000.0"}
+	 ,{"0.0000.00000.00.00000.0000.0"}
+	 ,{"0.0000.00000.00.00000.0000.0"}
+	 ,{"0d....d..d..d..d..d..d....d0"}
+	 ,{"0.0000.00.00000000.00.0000.0"}
+	 ,{"0.0000.00.00000000.00.0000.0"}
+	 ,{"0.....d00....00....00d.....0"}
+	 ,{"000000.00000.00.00000.000000"}
+	 ,{"000000.00000.00.00000.000000"}
+	 ,{"000000.00...d..d...00.000000"}
+	 ,{"000000.00.000##000.00.000000"}
+	 ,{"000000.00.000##000.00.000000"}
+	 ,{"......d..d0######0d..d......"}
+	 ,{"000000.00.0######0.00.000000"}
+	 ,{"000000.00.00000000.00.000000"}
+	 ,{"000000.00d........d00.000000"}
+	 ,{"000000.00.00000000.00.000000"}
+	 ,{"000000.00.00000000.00.000000"}
+	 ,{"0.....d..d...00...d..d.....0"}
+	 ,{"0.0000.00000.00.00000.0000.0"}
+	 ,{"0.0000.00000.00.00000.0000.0"}
+	 ,{"0...00d..d..d..d..d..d00...0"}
+	 ,{"000.00.00.00000000.00.00.000"}
+	 ,{"000.00.00.00000000.00.00.000"}
+	 ,{"0..d...00....00....00...d..0"}
+	 ,{"0.0000000000.00.0000000000.0"}
+	 ,{"0.0000000000.00.0000000000.0"}
+	 ,{"02..........d..d..........20"}
+	 ,{"0000000000000000000000000000"}
+	 ,{"                            "} };
+
 };
 
 

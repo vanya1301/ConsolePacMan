@@ -6,6 +6,9 @@ class RedFigure :
 public:
 	RedFigure();
 	virtual ~RedFigure();
-	Figure::FigureDirection changeFigureDirection();
+	FigureDirection changeFigureDirection(const Position &aPacManPosition);
+private:
+	Position calculateClosestPosition(const Position &aPacManPosition);
+	
 };
 

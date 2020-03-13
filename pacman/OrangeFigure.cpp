@@ -5,7 +5,7 @@
 OrangeFigure::OrangeFigure() : Figure(FigureType::ORANGE)
 {
 	mFigureColor = BACKGROUND_RED | BACKGROUND_GREEN;
-	sPosition = Position(12, 14);
+	sPosition = Position(13, 15);
 }
 
 
@@ -13,7 +13,7 @@ OrangeFigure::~OrangeFigure()
 {
 }
 
-Figure::FigureDirection OrangeFigure::changeFigureDirection()
+FigureDirection OrangeFigure::changeFigureDirection(const Position &aPacManPosition)
 {
-	return FigureDirection::DOWN;
+	return FigureDirection::NONE;
 }

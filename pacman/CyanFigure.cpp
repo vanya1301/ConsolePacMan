@@ -3,11 +3,11 @@
 
 
 CyanFigure::CyanFigure() :
-	Figure(Figure::FigureType::CYAN)
+	Figure(FigureType::CYAN)
 
 {
 	mFigureColor = BACKGROUND_INTENSITY | BACKGROUND_GREEN | BACKGROUND_BLUE;
-	sPosition = Position(11, 14);
+	sPosition = Position(14, 15);
 
 }
 
@@ -16,7 +16,7 @@ CyanFigure::~CyanFigure()
 {
 }
 
-Figure::FigureDirection CyanFigure::changeFigureDirection()
+FigureDirection CyanFigure::changeFigureDirection(const Position &aPacManPosition)
 {
-	return FigureDirection::DOWN;
+	return FigureDirection::NONE;
 }

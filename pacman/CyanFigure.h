@@ -6,6 +6,6 @@ class CyanFigure :
 public:
 	CyanFigure();
 	virtual ~CyanFigure();
-	FigureDirection changeFigureDirection();
+	FigureDirection changeFigureDirection(const Position &aPacManPosition);
 };
 

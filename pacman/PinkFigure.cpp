@@ -13,7 +13,10 @@ PinkFigure::~PinkFigure()
 {
 }
 
-Figure::FigureDirection PinkFigure::changeFigureDirection()
+FigureDirection PinkFigure::changeFigureDirection(const Position &aPacManPosition)
 {
-	return FigureDirection::DOWN;
+	FigureDirection result = FigureDirection::NONE;
+
+	setCurrentDirection(result);
+	return result;
 }

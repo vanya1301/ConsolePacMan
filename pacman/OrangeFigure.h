@@ -6,7 +6,7 @@ class OrangeFigure :
 public:
 	OrangeFigure();
 	virtual ~OrangeFigure();
-	FigureDirection changeFigureDirection();
+	FigureDirection changeFigureDirection(const Position &aPacManPosition);
 
 };
 

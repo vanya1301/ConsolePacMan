@@ -1,13 +1,11 @@
 #include "pch.h"
 #include "Game.h"
 #include <assert.h>
-//#include <strsafe.h>
-//#include <time.h>
 
 Game::Game() :
 	cWidthSize(28)
 	, cHeightSize(32)
-	, isGame(true)
+	, isGame(false)
 {
 	setWindow(cWidthSize, cHeightSize);
 
@@ -17,60 +15,65 @@ Game::Game() :
 	cursorInfo.dwSize = 1;
 	SetConsoleCursorInfo(mConsole, &cursorInfo);
 
-	mChiBuffer = new CHAR_INFO[(cWidthSize + 1)*(cHeightSize + 1)];
+	mPrintBuffer = new CHAR_INFO[cWidthSize * cHeightSize];
 
-	mDwBufferSize.X = cWidthSize * 1;
-	mDwBufferSize.Y = cHeightSize * 1;		// размер буфера данных
+	mBufferSize.X = cWidthSize;
+	mBufferSize.Y = cHeightSize;
 
-	mDwBufferCoord.X = 0;
-	mDwBufferCoord.Y = 0;				// координаты €чейки
 
-	mLpWriteRegion.Left = 0;
-	mLpWriteRegion.Top = 0;
-	mLpWriteRegion.Right = cWidthSize * 1;
-	mLpWriteRegion.Bottom = cHeightSize * 1;	// пр€моугольник дл€ чтени€
+	mBufferCoord.X = 0;
+	mBufferCoord.Y = 0;
+
+	mWriteRegion.Left = 0;
+	mWriteRegion.Top = 0;
+	mWriteRegion.Right = cWidthSize + 1;
+	mWriteRegion.Bottom = cHeightSize + 1;
 
 	mPlayField = new PlayField(cWidthSize, cHeightSize);
 
-	mPlayField->addFigure(new PacManFigure());
-	mPlayField->addFigure(new OrangeFigure());
-	mPlayField->addFigure(new PinkFigure());
-	mPlayField->addFigure(new CyanFigure());
-	mPlayField->addFigure(new RedFigure());
+	mPlayField->addFigure(FigureFactory::createFigure(FigureType::CYAN));
+	mPlayField->addFigure(FigureFactory::createFigure(FigureType::ORANGE));
+	mPlayField->addFigure(FigureFactory::createFigure(FigureType::PACMAN));
+	mPlayField->addFigure(FigureFactory::createFigure(FigureType::PINK));
+	mPlayField->addFigure(FigureFactory::createFigure(FigureType::RED));
 }
 
 
 Game::~Game()
 {
+	delete[] mPrintBuffer;
+	delete mPlayField;
 }
 
 void Game::Run()
-{	
+{
 	CStopwatch timer;
 	int sum = 0;
 	int deltaTime = 0;
-	
+
 	while (true)
 	{
-		timer.Start();
-		if (_kbhit()){
+		Render();
+		if (_kbhit()) {
 			keyPressed(_getch());
 			if (!FlushConsoleInputBuffer(mConsoleIn))
-				cout << "FlushConsoleInputBuffer failed with error " << GetLastError();
+				cout << "FlushConsoleInputBuffer error " << GetLastError();
 		}
+		if (isGame) {
+			timer.Start();
+			mPlayField->updateFigures(static_cast<float>(deltaTime) / 1000.0f);
 
-		mPlayField->moveFigures(static_cast<float>(deltaTime) / 1000.0f);
-		Render();
-		Sleep(1);
+			Sleep(1);
 
-		while (true)
-		{
-			deltaTime = timer.Now();
-			if (deltaTime > 20)
-				break;
+			while (true)
+			{
+				deltaTime = timer.Now();
+				if (deltaTime > 20)
+					break;
+			}
+
+			sum += deltaTime;
 		}
-
-		sum += deltaTime;
 	}
 }
 
@@ -96,16 +99,33 @@ void Game::setWindow(const int &Width, const int &Height)
 
 void Game::keyPressed(const int &aKeyCode)
 {
-	if (isGame){
-		mPlayField->setPacManDirection(aKeyCode);
-	}
+	isGame = isDirectioKey(aKeyCode);
+	mPlayField->setPacManDirection(aKeyCode);
+
 }
 
 void Game::Render()
 {
-	mChiBuffer = mPlayField->getBuffer();
+	mPrintBuffer = mPlayField->getBuffer();
 
-	if (!WriteConsoleOutput(mConsole, mChiBuffer, mDwBufferSize, mDwBufferCoord, &mLpWriteRegion)){
-		printf("WriteConsoleOutput failed - (%d)\n", GetLastError());
+	if (!WriteConsoleOutput(mConsole, mPrintBuffer, mBufferSize, mBufferCoord, &mWriteRegion)) {
+		printf("WriteConsoleOutput error - (%d)\n", GetLastError());
 	}
+}
+
+bool Game::isDirectioKey(int aKeyCode)
+{
+	bool result = false;
+	switch (aKeyCode)
+	{
+	case PlayField::Direction::DOWN:
+	case PlayField::Direction::UP:
+	case PlayField::Direction::LEFT:
+	case PlayField::Direction::RIGHT:
+		result = true;
+		break;
+	default:
+		break;
+	}
+	return result;
 }

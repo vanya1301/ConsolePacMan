@@ -6,6 +6,6 @@ class PinkFigure:
 public:
 	PinkFigure();
 	~PinkFigure();
-	FigureDirection changeFigureDirection();
+	FigureDirection changeFigureDirection(const Position &aPacManPosition);
 };
 

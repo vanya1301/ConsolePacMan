@@ -14,7 +14,7 @@ PacManFigure::~PacManFigure()
 {
 }
 
-Figure::FigureDirection PacManFigure::changeFigureDirection()
+FigureDirection PacManFigure::changeFigureDirection(const Position &aPacManPosition)
 {
 	return FigureDirection::DOWN;
 }

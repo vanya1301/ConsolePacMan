@@ -151,18 +151,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="BarierCell.h" />
     <ClInclude Include="CStopwatch.h" />
     <ClInclude Include="CyanFigure.h" />
-    <ClInclude Include="Cell.h" />
-    <ClInclude Include="Cells.h" />
-    <ClInclude Include="FieldLabyrinth.h" />
-    <ClInclude Include="Figures.h" />
+    <ClInclude Include="FigureFactory.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="JailCell.h" />
     <ClInclude Include="OrangeFigure.h" />
     <ClInclude Include="PinkFigure.h" />
-    <ClInclude Include="PlayCell.h" />
     <ClInclude Include="PlayField.h" />
     <ClInclude Include="Figure.h" />
     <ClInclude Include="PacManFigure.h" />
@@ -170,15 +164,11 @@
     <ClInclude Include="RedFigure.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BarierCell.cpp" />
     <ClCompile Include="CStopwatch.cpp" />
     <ClCompile Include="CyanFigure.cpp" />
-    <ClCompile Include="Cell.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="JailCell.cpp" />
     <ClCompile Include="OrangeFigure.cpp" />
     <ClCompile Include="PinkFigure.cpp" />
-    <ClCompile Include="PlayCell.cpp" />
     <ClCompile Include="PlayField.cpp" />
     <ClCompile Include="Figure.cpp" />
     <ClCompile Include="PacManFigure.cpp" />
