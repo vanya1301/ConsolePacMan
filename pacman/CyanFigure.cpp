@@ -3,12 +3,11 @@
 
 
 CyanFigure::CyanFigure() :
-    Figure(FigureType::CYAN)
+    Figure(FigureType::CYAN
+        , Position(14, 15)
+        , BACKGROUND_INTENSITY | BACKGROUND_GREEN | BACKGROUND_BLUE)
 
 {
-    mFigureColor = BACKGROUND_INTENSITY | BACKGROUND_GREEN | BACKGROUND_BLUE;
-    sPosition = Position(14, 15);
-
 }
 
 

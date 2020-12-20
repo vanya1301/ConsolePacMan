@@ -37,7 +37,8 @@ public:
         , NONE
     };
 
-    Figure(const FigureType& type);
+    Figure(const FigureType& type, const Position& figurePos, short figureColor);
+
     virtual ~Figure();
 
     Position getPosition() const;

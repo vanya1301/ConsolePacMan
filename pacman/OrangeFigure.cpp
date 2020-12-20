@@ -2,10 +2,10 @@
 #include "OrangeFigure.h"
 
 
-OrangeFigure::OrangeFigure() : Figure(FigureType::ORANGE)
+OrangeFigure::OrangeFigure() : Figure(FigureType::ORANGE
+    , Position(13, 15)
+    , BACKGROUND_RED | BACKGROUND_GREEN)
 {
-    mFigureColor = BACKGROUND_RED | BACKGROUND_GREEN;
-    sPosition = Position(13, 15);
 }
 
 

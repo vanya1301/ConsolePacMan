@@ -2,10 +2,10 @@
 #include "PinkFigure.h"
 
 
-PinkFigure::PinkFigure() : Figure(FigureType::PINK)
+PinkFigure::PinkFigure() : Figure(FigureType::PINK
+    , Position(14, 14)
+    , BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_BLUE)
 {
-    mFigureColor = BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_BLUE;
-    sPosition = Position(14, 14);
 }
 
 

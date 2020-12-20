@@ -2,10 +2,8 @@
 #include "RedFigure.h"
 
 
-RedFigure::RedFigure() : Figure(FigureType::RED)
+RedFigure::RedFigure() : Figure(FigureType::RED, Position(13, 11), BACKGROUND_RED)
 {
-    mFigureColor = BACKGROUND_RED;
-    sPosition = Position(13, 11);
 }
 
 

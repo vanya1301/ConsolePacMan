@@ -3,12 +3,14 @@
 #include "cmath"
 
 
-Figure::Figure(const FigureType& type) :
+Figure::Figure(const FigureType& type, const Position& figurePos, short figureColor) :
     mFigureType(type)
+    , sPosition(figurePos)
+    , mFigureColor(figureColor)
+    , mMoveDirection(FigureDirection::NONE)
+    , mNextDirection(FigureDirection::NONE)
 {
 }
-
-
 
 Figure::~Figure()
 {
@@ -36,9 +38,8 @@ void Figure::setPosition(const Position& aPosition)
 
 void Figure::setCurrentDirection(const FigureDirection& aDirection)
 {
-    if (aDirection != FigureDirection::NONE) {
+    if (aDirection != FigureDirection::NONE)
         mMoveDirection = aDirection;
-    }
 }
 
 void Figure::setNextDirection(const FigureDirection& aDirection)

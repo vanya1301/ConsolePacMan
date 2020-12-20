@@ -3,10 +3,10 @@
 
 
 PacManFigure::PacManFigure() :
-    Figure(FigureType::PACMAN)
+    Figure(FigureType::PACMAN
+        , Position(14, 23)
+        , BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN)
 {
-    mFigureColor = BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN;
-    sPosition = Position(14, 23);
 }
 
 
