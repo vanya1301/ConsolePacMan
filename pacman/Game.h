@@ -4,6 +4,7 @@
 #include <Windows.h>
 #include  "FigureFactory.h"
 #include "CStopwatch.h"
+#include <memory>
 
 
 class Game
@@ -32,6 +33,6 @@ private:
 	int mGhostsSpeed;
 	int mPacManSpeed;
 
-	PlayField *mPlayField;
+	std::shared_ptr<PlayField>mPlayField;
 };
 

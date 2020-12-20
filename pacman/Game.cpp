@@ -29,7 +29,7 @@ Game::Game() :
 	mWriteRegion.Right = cWidthSize + 1;
 	mWriteRegion.Bottom = cHeightSize + 1;
 
-	mPlayField = new PlayField(cWidthSize, cHeightSize);
+	mPlayField = std::make_shared<PlayField>(cWidthSize, cHeightSize);
 
 	mPlayField->addFigure(FigureFactory::createFigure(FigureType::CYAN));
 	mPlayField->addFigure(FigureFactory::createFigure(FigureType::ORANGE));
@@ -42,7 +42,6 @@ Game::Game() :
 Game::~Game()
 {
 	delete[] mPrintBuffer;
-	delete mPlayField;
 }
 
 void Game::Run()
