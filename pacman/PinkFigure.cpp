@@ -4,8 +4,8 @@
 
 PinkFigure::PinkFigure() : Figure(FigureType::PINK)
 {
-	mFigureColor = BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_BLUE;
-	sPosition = Position(14, 14);
+    mFigureColor = BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_BLUE;
+    sPosition = Position(14, 14);
 }
 
 
@@ -13,10 +13,10 @@ PinkFigure::~PinkFigure()
 {
 }
 
-FigureDirection PinkFigure::changeFigureDirection(const Position &aPacManPosition)
+FigureDirection PinkFigure::changeFigureDirection(const Position& aPacManPosition)
 {
-	FigureDirection result = FigureDirection::NONE;
+    FigureDirection result = FigureDirection::NONE;
 
-	setCurrentDirection(result);
-	return result;
+    setCurrentDirection(result);
+    return result;
 }

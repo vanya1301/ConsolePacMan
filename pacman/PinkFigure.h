@@ -1,11 +1,11 @@
 #pragma once
 #include "Figure.h"
-class PinkFigure:
-	public Figure
+class PinkFigure :
+    public Figure
 {
 public:
-	PinkFigure();
-	~PinkFigure();
-	FigureDirection changeFigureDirection(const Position &aPacManPosition);
+    PinkFigure();
+    ~PinkFigure();
+    FigureDirection changeFigureDirection(const Position& aPacManPosition);
 };
 

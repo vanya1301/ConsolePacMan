@@ -11,105 +11,105 @@ class PlayField
 {
 public:
 
-	enum Direction
-	{
-		DOWN = 80,
-		UP = 72,
-		RIGHT = 77,
-		LEFT = 75
-	};
+    enum Direction
+    {
+        DOWN = 80,
+        UP = 72,
+        RIGHT = 77,
+        LEFT = 75
+    };
 
-	PlayField(int xSize, int ySize);
+    PlayField(int xSize, int ySize);
 
-	virtual ~PlayField();
+    virtual ~PlayField();
 
-	void setFigurePosition(Figure * aFigure, const Position &aPosition);
+    void setFigurePosition(Figure* aFigure, const Position& aPosition);
 
-	bool addFigure(Figure *aFigure);
+    bool addFigure(Figure* aFigure);
 
-	void updateFigures(const float &delta);
+    void updateFigures(const float& delta);
 
-	void movePacMan(const float &delta);
+    void movePacMan(const float& delta);
 
-	void moveGhosts(const float &delta);
+    void moveGhosts(const float& delta);
 
-	void moveFigure(Figure *figure);
+    void moveFigure(Figure* figure);
 
-	void setPacManDirection(const int &aKeyCode);
+    void setPacManDirection(const int& aKeyCode);
 
-	int getPoints() const;
+    int getPoints() const;
 
-	int getLifes() const;
+    int getLifes() const;
 
-	CHAR_INFO* getBuffer();
+    CHAR_INFO* getBuffer();
 
 private:
 
-	void fillField();
+    void fillField();
 
-	void setCell(const Position &aPos, const wchar_t &aSymbol, const short &aColor = FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);
+    void setCell(const Position& aPos, const wchar_t& aSymbol, const short& aColor = FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);
 
-	char getCellSymbol(const Position &aPosition) const;
+    char getCellSymbol(const Position& aPosition) const;
 
-	bool isFigureTypeExists(const Figure &aFigure) const;
+    bool isFigureTypeExists(const Figure& aFigure) const;
 
-	bool isJailCell(const Position &aPosition) const;
+    bool isJailCell(const Position& aPosition) const;
 
-	bool isDecidingCell(const Position &aPosition) const;
+    bool isDecidingCell(const Position& aPosition) const;
 
-	Figure* getPacMan();
+    Figure* getPacMan();
 
-	const int xSize;
+    const int xSize;
 
-	const int ySize;
+    const int ySize;
 
-	vector<Figure*> mFigures;
+    vector<Figure*> mFigures;
 
-	int mScore;
+    int mScore;
 
-	int mLife;
+    int mLife;
 
-	CHAR_INFO* mChiBuffer;
+    CHAR_INFO* mChiBuffer;
 
-	string mScoreStr{ "Score:" };
+    string mScoreStr{ "Score:" };
 
-	vector<Position> mDecidingCells;
+    vector<Position> mDecidingCells;
 
-	vector<Position> mJailCells;
+    vector<Position> mJailCells;
 
-	vector<string> mLabyrinthMap =
-	{ {"0000000000000000000000000000"}
-	 ,{"02....d......00......d....20"}
-	 ,{"0.0000.00000.00.00000.0000.0"}
-	 ,{"0.0000.00000.00.00000.0000.0"}
-	 ,{"0.0000.00000.00.00000.0000.0"}
-	 ,{"0d....d..d..d..d..d..d....d0"}
-	 ,{"0.0000.00.00000000.00.0000.0"}
-	 ,{"0.0000.00.00000000.00.0000.0"}
-	 ,{"0.....d00....00....00d.....0"}
-	 ,{"000000.00000.00.00000.000000"}
-	 ,{"000000.00000.00.00000.000000"}
-	 ,{"000000.00...d..d...00.000000"}
-	 ,{"000000.00.000##000.00.000000"}
-	 ,{"000000.00.000##000.00.000000"}
-	 ,{"......d..d0######0d..d......"}
-	 ,{"000000.00.0######0.00.000000"}
-	 ,{"000000.00.00000000.00.000000"}
-	 ,{"000000.00d........d00.000000"}
-	 ,{"000000.00.00000000.00.000000"}
-	 ,{"000000.00.00000000.00.000000"}
-	 ,{"0.....d..d...00...d..d.....0"}
-	 ,{"0.0000.00000.00.00000.0000.0"}
-	 ,{"0.0000.00000.00.00000.0000.0"}
-	 ,{"0...00d..d..d..d..d..d00...0"}
-	 ,{"000.00.00.00000000.00.00.000"}
-	 ,{"000.00.00.00000000.00.00.000"}
-	 ,{"0..d...00....00....00...d..0"}
-	 ,{"0.0000000000.00.0000000000.0"}
-	 ,{"0.0000000000.00.0000000000.0"}
-	 ,{"02..........d..d..........20"}
-	 ,{"0000000000000000000000000000"}
-	 ,{"                            "} };
+    vector<string> mLabyrinthMap =
+    { {"0000000000000000000000000000"}
+     ,{"02....d......00......d....20"}
+     ,{"0.0000.00000.00.00000.0000.0"}
+     ,{"0.0000.00000.00.00000.0000.0"}
+     ,{"0.0000.00000.00.00000.0000.0"}
+     ,{"0d....d..d..d..d..d..d....d0"}
+     ,{"0.0000.00.00000000.00.0000.0"}
+     ,{"0.0000.00.00000000.00.0000.0"}
+     ,{"0.....d00....00....00d.....0"}
+     ,{"000000.00000.00.00000.000000"}
+     ,{"000000.00000.00.00000.000000"}
+     ,{"000000.00...d..d...00.000000"}
+     ,{"000000.00.000##000.00.000000"}
+     ,{"000000.00.000##000.00.000000"}
+     ,{"......d..d0######0d..d......"}
+     ,{"000000.00.0######0.00.000000"}
+     ,{"000000.00.00000000.00.000000"}
+     ,{"000000.00d........d00.000000"}
+     ,{"000000.00.00000000.00.000000"}
+     ,{"000000.00.00000000.00.000000"}
+     ,{"0.....d..d...00...d..d.....0"}
+     ,{"0.0000.00000.00.00000.0000.0"}
+     ,{"0.0000.00000.00.00000.0000.0"}
+     ,{"0...00d..d..d..d..d..d00...0"}
+     ,{"000.00.00.00000000.00.00.000"}
+     ,{"000.00.00.00000000.00.00.000"}
+     ,{"0..d...00....00....00...d..0"}
+     ,{"0.0000000000.00.0000000000.0"}
+     ,{"0.0000000000.00.0000000000.0"}
+     ,{"02..........d..d..........20"}
+     ,{"0000000000000000000000000000"}
+     ,{"                            "} };
 
 };
 

@@ -9,31 +9,31 @@
 class FigureFactory
 {
 public:
-	static Figure* createFigure(const FigureType &aType)
-	{
-		Figure *result = nullptr;
-		switch (aType)
-		{
-		case FigureType::CYAN:
-			result = new CyanFigure();
-			break;
-		case FigureType::ORANGE:
-			result = new OrangeFigure();
-			break;
-		case FigureType::PACMAN:
-			result = new PacManFigure();
-			break;
-		case FigureType::PINK:
-			result = new PinkFigure();
-			break;
-		case FigureType::RED:
-			result = new RedFigure();
-			break;
-		default:
-			break;
-		}
-		return result;
-	}
+    static Figure* createFigure(const FigureType& aType)
+    {
+        Figure* result = nullptr;
+        switch (aType)
+        {
+        case FigureType::CYAN:
+            result = new CyanFigure();
+            break;
+        case FigureType::ORANGE:
+            result = new OrangeFigure();
+            break;
+        case FigureType::PACMAN:
+            result = new PacManFigure();
+            break;
+        case FigureType::PINK:
+            result = new PinkFigure();
+            break;
+        case FigureType::RED:
+            result = new RedFigure();
+            break;
+        default:
+            break;
+        }
+        return result;
+    }
 private:
-	virtual ~FigureFactory() {}
+    virtual ~FigureFactory() {}
 };

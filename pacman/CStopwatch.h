@@ -3,14 +3,14 @@
 class CStopwatch
 {
 public:
-	CStopwatch();
-	virtual ~CStopwatch();
+    CStopwatch();
+    virtual ~CStopwatch();
 
-	void Start();
-	int Now();
-	int Time();
+    void Start();
+    int Now();
+    int Time();
 private:
-	LARGE_INTEGER m_liPerfFreq;
-	LARGE_INTEGER m_liPerfStart;
+    LARGE_INTEGER m_liPerfFreq;
+    LARGE_INTEGER m_liPerfStart;
 };
 
