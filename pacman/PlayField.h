@@ -4,6 +4,7 @@
 #include "Cells.h"
 #include <vector>
 #include <iostream>
+#include <memory>
 #include <Windows.h>
 
 using namespace std;
@@ -23,9 +24,9 @@ public:
 
     virtual ~PlayField();
 
-    void setFigurePosition(Figure* aFigure, const Position& aPosition);
+    void setFigurePosition(std::shared_ptr<Figure> aFigure, const Position& aPosition);
 
-    bool addFigure(Figure* aFigure);
+    bool addFigure(std::shared_ptr<Figure> aFigure);
 
     void updateFigures(const float& delta);
 
@@ -33,7 +34,7 @@ public:
 
     void moveGhosts(const float& delta);
 
-    void moveFigure(Figure* figure);
+    void moveFigure(std::shared_ptr<Figure> figure);
 
     void setPacManDirection(const int& aKeyCode);
 
@@ -47,7 +48,8 @@ private:
 
     void fillField();
 
-    void setCell(const Position& aPos, const wchar_t& aSymbol, const short& aColor = FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);
+    void setCell(const Position& aPos, const wchar_t& aSymbol, 
+        const short& aColor = FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);
 
     char getCellSymbol(const Position& aPosition) const;
 
@@ -57,13 +59,13 @@ private:
 
     bool isDecidingCell(const Position& aPosition) const;
 
-    Figure* getPacMan();
+    std::shared_ptr<Figure> getPacMan();
 
     const int xSize;
 
     const int ySize;
 
-    vector<Figure*> mFigures;
+    vector<std::shared_ptr<Figure>> mFigures;
 
     int mScore;
 

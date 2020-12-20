@@ -14,10 +14,6 @@ PlayField::PlayField(int xSize, int ySize) :
 PlayField::~PlayField()
 {
     delete[] mChiBuffer;
-    for (auto a : mFigures)
-    {
-        delete a;
-    }
 }
 
 void PlayField::fillField()
@@ -108,9 +104,9 @@ bool PlayField::isDecidingCell(const Position& aPosition) const
     return result;
 }
 
-Figure* PlayField::getPacMan()
+std::shared_ptr<Figure> PlayField::getPacMan()
 {
-    Figure* result = nullptr;
+    std::shared_ptr<Figure> result = nullptr;
     for (const auto& figure : mFigures)
     {
         if (figure->getType() == FigureType::PACMAN) {
@@ -156,7 +152,7 @@ void PlayField::setPacManDirection(const int& aKeyCode)
     }
 }
 
-void PlayField::setFigurePosition(Figure* aFigure, const Position& aPosition)
+void PlayField::setFigurePosition(std::shared_ptr<Figure> aFigure, const Position& aPosition)
 {
     if (aFigure != nullptr) {
         for (const auto& figure : mFigures)
@@ -175,7 +171,7 @@ void PlayField::setFigurePosition(Figure* aFigure, const Position& aPosition)
 
 }
 
-bool PlayField::addFigure(Figure* aFigure)
+bool PlayField::addFigure(std::shared_ptr<Figure> aFigure)
 {
     bool result = false;
     if (aFigure != nullptr) {
@@ -228,9 +224,8 @@ void PlayField::moveGhosts(const float& delta)
 {
     static float waiter = 0;
     auto pacMan = getPacMan();
-    FigureDirection figureDirection;
     waiter += delta;
-    if (waiter > 0.15) {
+    if (waiter > 0.15f) {
         for (auto& ghost : mFigures)
         {
             if (ghost->getType() != FigureType::PACMAN) {
@@ -244,7 +239,7 @@ void PlayField::moveGhosts(const float& delta)
     }
 }
 
-void PlayField::moveFigure(Figure* figure)
+void PlayField::moveFigure(std::shared_ptr<Figure> figure)
 {
     auto figureDirection = figure->getCurrentDirection();
     auto figurePos = figure->getPosition();

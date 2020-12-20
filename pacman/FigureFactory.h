@@ -5,29 +5,30 @@
 #include "PinkFigure.h"
 #include "RedFigure.h"
 #include "CyanFigure.h"
+#include <memory>
 
 class FigureFactory
 {
 public:
-    static Figure* createFigure(const FigureType& aType)
+    static std::shared_ptr<Figure> createFigure(const FigureType& aType)
     {
-        Figure* result = nullptr;
+        std::shared_ptr<Figure> result = nullptr;
         switch (aType)
         {
         case FigureType::CYAN:
-            result = new CyanFigure();
+            result = std::make_shared<CyanFigure>();
             break;
         case FigureType::ORANGE:
-            result = new OrangeFigure();
+            result = std::make_shared<OrangeFigure>();
             break;
         case FigureType::PACMAN:
-            result = new PacManFigure();
+            result = std::make_shared<PacManFigure>();
             break;
         case FigureType::PINK:
-            result = new PinkFigure();
+            result = std::make_shared<PinkFigure>();
             break;
         case FigureType::RED:
-            result = new RedFigure();
+            result = std::make_shared<RedFigure>();
             break;
         default:
             break;
