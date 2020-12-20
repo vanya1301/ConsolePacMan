@@ -66,5 +66,5 @@ protected:
     FigureDirection mNextDirection;
 };
 
-typedef Figure::FigureDirection FigureDirection;
-typedef Figure::FigureType FigureType;
+using FigureDirection = Figure::FigureDirection;
+using FigureType = Figure::FigureType;
