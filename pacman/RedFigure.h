@@ -5,8 +5,8 @@ class RedFigure :
 {
 public:
     RedFigure();
-    virtual ~RedFigure();
-    FigureDirection changeFigureDirection(const Position& aPacManPosition);
+    virtual ~RedFigure() = default;
+    FigureDirection changeFigureDirection(const Position& aPacManPosition) override;
 private:
     Position calculateClosestPosition(const Position& aPacManPosition);
 

@@ -10,11 +10,6 @@ CyanFigure::CyanFigure() :
 {
 }
 
-
-CyanFigure::~CyanFigure()
-{
-}
-
 FigureDirection CyanFigure::changeFigureDirection(const Position& aPacManPosition)
 {
     return FigureDirection::NONE;

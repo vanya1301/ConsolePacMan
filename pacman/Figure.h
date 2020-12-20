@@ -39,7 +39,7 @@ public:
 
     Figure(const FigureType& type, const Position& figurePos, short figureColor);
 
-    virtual ~Figure();
+    virtual ~Figure() = default;
 
     Position getPosition() const;
 
@@ -59,7 +59,7 @@ public:
 
 protected:
     float destination(const Position& p1, const Position& p2);
-    Position sPosition;
+    Position sPos;
     const FigureType mFigureType;
     short mFigureColor;
     FigureDirection mMoveDirection;

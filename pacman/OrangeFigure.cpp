@@ -8,11 +8,6 @@ OrangeFigure::OrangeFigure() : Figure(FigureType::ORANGE
 {
 }
 
-
-OrangeFigure::~OrangeFigure()
-{
-}
-
 FigureDirection OrangeFigure::changeFigureDirection(const Position& aPacManPosition)
 {
     return FigureDirection::NONE;

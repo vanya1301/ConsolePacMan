@@ -8,11 +8,6 @@ PinkFigure::PinkFigure() : Figure(FigureType::PINK
 {
 }
 
-
-PinkFigure::~PinkFigure()
-{
-}
-
 FigureDirection PinkFigure::changeFigureDirection(const Position& aPacManPosition)
 {
     FigureDirection result = FigureDirection::NONE;

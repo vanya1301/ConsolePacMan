@@ -5,8 +5,7 @@ class OrangeFigure :
 {
 public:
     OrangeFigure();
-    virtual ~OrangeFigure();
-    FigureDirection changeFigureDirection(const Position& aPacManPosition);
-
+    virtual ~OrangeFigure() = default;
+    FigureDirection changeFigureDirection(const Position& aPacManPosition) override;
 };
 

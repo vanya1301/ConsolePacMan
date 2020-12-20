@@ -5,7 +5,7 @@ class PinkFigure :
 {
 public:
     PinkFigure();
-    ~PinkFigure();
-    FigureDirection changeFigureDirection(const Position& aPacManPosition);
+    virtual ~PinkFigure() = default;
+    FigureDirection changeFigureDirection(const Position& aPacManPosition) override;
 };
 

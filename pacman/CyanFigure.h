@@ -5,7 +5,7 @@ class CyanFigure :
 {
 public:
     CyanFigure();
-    virtual ~CyanFigure();
-    FigureDirection changeFigureDirection(const Position& aPacManPosition);
+    virtual ~CyanFigure() = default;
+    FigureDirection changeFigureDirection(const Position& aPacManPosition) override;
 };
 

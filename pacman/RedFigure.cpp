@@ -1,61 +1,48 @@
 #include "pch.h"
 #include "RedFigure.h"
+#include <map>
+#include <vector>
+#include <limits>
 
 
 RedFigure::RedFigure() : Figure(FigureType::RED, Position(13, 11), BACKGROUND_RED)
 {
 }
 
-
-RedFigure::~RedFigure()
-{
-}
-
-FigureDirection RedFigure::changeFigureDirection(const Position& aPacManPosition)
+FigureDirection RedFigure::changeFigureDirection(const Position& aPacManPos)
 {
     FigureDirection result = FigureDirection::NONE;
+    std::map<FigureDirection, float> distances;
+    distances[FigureDirection::RIGHT] = destination(Position(aPacManPos.x + 1, aPacManPos.y), sPos);
+    distances[FigureDirection::LEFT] = destination(Position(aPacManPos.x - 1, aPacManPos.y), sPos);
+    distances[FigureDirection::UP] = destination(Position(aPacManPos.x, aPacManPos.y + 1), sPos);
+    distances[FigureDirection::DOWN] = destination(Position(aPacManPos.x, aPacManPos.y - 1), sPos);
 
-    float dest = 10000.0f;
+    float minDist = FLT_MAX;
 
-    if (destination(Position(aPacManPosition.x + 1, aPacManPosition.y), sPosition) < dest) {
-        dest = destination(Position(aPacManPosition.x + 1, aPacManPosition.y), sPosition);
-        result = FigureDirection::RIGHT;
-    }
-
-    if (destination(Position(aPacManPosition.x - 1, aPacManPosition.y), sPosition) < dest) {
-        dest = destination(Position(aPacManPosition.x - 1, aPacManPosition.y), sPosition);
-        result = FigureDirection::LEFT;
-    }
-
-    if (destination(Position(aPacManPosition.x, aPacManPosition.y + 1), sPosition) < dest) {
-        dest = destination(Position(aPacManPosition.x, aPacManPosition.y + 1), sPosition);
-        result = FigureDirection::UP;
-    }
-
-    if (destination(Position(aPacManPosition.x, aPacManPosition.y - 1), sPosition) < dest) {
-        dest = destination(Position(aPacManPosition.x, aPacManPosition.y - 1), sPosition);
-        result = FigureDirection::DOWN;
-    }
-
+    for (const auto& item : distances)
+        if (item.second < minDist) {
+            minDist = item.second;
+            result = item.first;
+        }
     setCurrentDirection(result);
     return result;
 }
+ 
 
 Position RedFigure::calculateClosestPosition(const Position& aPacManPosition)
 {
-    float dest = 10000.0f;
+    using namespace std;
+    std::vector<float> distances = {
+    destination(Position(aPacManPosition.x + 1, aPacManPosition.y), sPos)
+    ,destination(Position(aPacManPosition.x - 1, aPacManPosition.y), sPos)
+    ,destination(Position(aPacManPosition.x, aPacManPosition.y + 1), sPos)
+    ,destination(Position(aPacManPosition.x + 1, aPacManPosition.y - 1), sPos) };
+    float minDist = FLT_MAX;
 
-    if (destination(Position(aPacManPosition.x + 1, aPacManPosition.y), sPosition) < dest)
-        dest = destination(Position(aPacManPosition.x + 1, aPacManPosition.y), sPosition);
+    for (const auto& item : distances)
+        if (item < minDist)
+            minDist = item;
 
-    if (destination(Position(aPacManPosition.x - 1, aPacManPosition.y), sPosition) < dest)
-        dest = destination(Position(aPacManPosition.x - 1, aPacManPosition.y), sPosition);
-
-    if (destination(Position(aPacManPosition.x, aPacManPosition.y + 1), sPosition) < dest)
-        dest = destination(Position(aPacManPosition.x, aPacManPosition.y + 1), sPosition);
-
-    if (destination(Position(aPacManPosition.x + 1, aPacManPosition.y - 1), sPosition) < dest)
-        dest = destination(Position(aPacManPosition.x, aPacManPosition.y - 1), sPosition);
-
-    return dest;
+    return minDist;
 }

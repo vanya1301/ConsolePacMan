@@ -5,20 +5,16 @@
 
 Figure::Figure(const FigureType& type, const Position& figurePos, short figureColor) :
     mFigureType(type)
-    , sPosition(figurePos)
+    , sPos(figurePos)
     , mFigureColor(figureColor)
     , mMoveDirection(FigureDirection::NONE)
     , mNextDirection(FigureDirection::NONE)
 {
 }
 
-Figure::~Figure()
-{
-}
-
 Position Figure::getPosition() const
 {
-    return sPosition;
+    return sPos;
 }
 
 FigureType Figure::getType() const
@@ -33,7 +29,7 @@ short Figure::getFigureColor() const
 
 void Figure::setPosition(const Position& aPosition)
 {
-    sPosition = aPosition;
+    sPos = aPosition;
 }
 
 void Figure::setCurrentDirection(const FigureDirection& aDirection)
@@ -49,9 +45,7 @@ void Figure::setNextDirection(const FigureDirection& aDirection)
 
 float Figure::destination(const Position& p1, const Position& p2)
 {
-    float result = 0.0f;
-    result = abs(sqrtf(pow((p2.x - p1.x), 2) + pow((p2.y - p1.y), 2)));
-    return result;
+    return abs(sqrtf(pow((p2.x - p1.x), 2) + pow((p2.y - p1.y), 2)));
 }
 
 FigureDirection Figure::getCurrentDirection() const

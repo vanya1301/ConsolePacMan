@@ -4,10 +4,10 @@ class PacManFigure : public Figure
 {
 public:
     PacManFigure();
-    ~PacManFigure();
+    ~PacManFigure() = default;
     void setNextDirection(const FigureDirection& aDirection);
 private:
-    FigureDirection changeFigureDirection(const Position& aPacManPosition);
+    FigureDirection changeFigureDirection(const Position& aPacManPosition) override;
 
     FigureDirection mNextDirection;
 };
