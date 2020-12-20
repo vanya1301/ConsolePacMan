@@ -1,8 +1,0 @@
-﻿  Game.cpp
-  PlayField.cpp
-c:\users\vanya\source\repos\pacman\pacman\playfield.cpp(25): warning C4018: '<': signed/unsigned mismatch
-c:\users\vanya\source\repos\pacman\pacman\playfield.cpp(27): warning C4018: '<': signed/unsigned mismatch
-c:\users\vanya\source\repos\pacman\pacman\playfield.cpp(231): warning C4101: 'figureDirection': unreferenced local variable
-  main.cpp
-  Generating Code...
-  pacman.vcxproj -> C:\Users\Vanya\Source\Repos\pacman\Debug\pacman.exe
