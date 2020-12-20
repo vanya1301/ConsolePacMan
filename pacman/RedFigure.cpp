@@ -7,6 +7,9 @@
 
 RedFigure::RedFigure() : Figure(FigureType::RED, Position(13, 11), BACKGROUND_RED)
 {
+    // TODO: у фигуры нет начального движения,
+    // и фигура выбирает направление не опираясь на доступные для хода клетки
+    mMoveDirection = FigureDirection::RIGHT;
 }
 
 FigureDirection RedFigure::changeFigureDirection(const Position& aPacManPos)
